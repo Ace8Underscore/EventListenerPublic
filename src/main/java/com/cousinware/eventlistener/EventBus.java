@@ -29,7 +29,7 @@ public class EventBus {
         }
     }
 
-    public void postEvent(Class<?> c) throws InvocationTargetException, IllegalAccessException {
+    public void postEvent(Object c) throws InvocationTargetException, IllegalAccessException {
         for (Method method : targetMethodsArrayList) {
 
             //System.out.println(Arrays.toString(method.getDeclaredAnnotations()));
@@ -37,9 +37,13 @@ public class EventBus {
             for (int i = 0; i < method.getDeclaredAnnotations().length; i ++) {
                 Listener l = (Listener) method.getDeclaredAnnotations()[i];
 
-                if (c == l.event()) {
+                if (c.getClass() == l.event()) {
                     System.out.println(method.getDeclaringClass());
-                    method.invoke(method.getDeclaringClass());
+                    try {
+                        method.invoke(method.getDeclaringClass(), c);
+                    } catch (Exception e) {
+                        System.out.println("Tried to Post event but failed! Have you initialized your listener correctly? err at: " + method);
+                    }
                 }
                 //if (method.getDeclaredAnnotations()[i].annotationType() == Lis)
             }

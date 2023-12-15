@@ -16,8 +16,9 @@ public class Test {
     }
 
     @Listener(event = StartEvent.class)
-    public static void update2() {
+    public static void update2(StartEvent event) {
         System.out.println("Starting");
+        System.out.println(event.getStartTime());
     }
 
     //@Listener
