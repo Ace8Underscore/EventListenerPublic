@@ -10,12 +10,13 @@ public class Test {
         Main.INSTANCE.eventBus.addListener(this.getClass());
     }
 
-    @Listener(event = TickEvent.class)
-    public static void update() {
+   // @Listener(event =
+    @Listener
+    public static void update(TickEvent event) {
         System.out.println("Ticking");
     }
 
-    @Listener(event = StartEvent.class)
+    @Listener()
     public static void update2(StartEvent event) {
         System.out.println("Starting");
         System.out.println(event.getStartTime());
