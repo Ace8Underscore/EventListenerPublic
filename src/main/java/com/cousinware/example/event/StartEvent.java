@@ -1,4 +1,4 @@
-package com.cousinware.demo.event;
+package com.cousinware.example.event;
 
 public class StartEvent extends Event {
 
