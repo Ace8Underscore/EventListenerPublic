@@ -6,9 +6,8 @@ import com.cousinware.example.event.TickEvent;
 
 public class Main {
 
-    public static Main INSTANCE;
-
     public static EventBus eventBus;
+    public static long startTime = System.currentTimeMillis();
 
     public static void main(String[] args) {
 
@@ -19,9 +18,10 @@ public class Main {
         Test test = new Test();
 
         //post an event to the event bus so it can be processed
-        eventBus.postEvent(new StartEvent(System.nanoTime()));
+        for (int i = 0; i < 100; i++) {
+            eventBus.postEvent(new StartEvent(System.currentTimeMillis()));
 
-        eventBus.postEvent(new TickEvent());
+        }
 
 
 
